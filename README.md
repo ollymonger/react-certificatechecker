@@ -1,5 +1,21 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+##Getting Set-up
+This is React Project with a NODEJS Server.
+
+To set this project up for own development:
+  - install required components: (npm i ... --save):
+    - check-cert-expiration
+    - express
+    - azure-storage
+    - dotenv
+    
+  - Create a file called: server.env
+  - Place access keys for your table storage in here under the names:
+    - 'ACCESS_KEY'
+    - 'STORAGENAME'
+  - The table will be created if it does not exist.
+
 ## Available Scripts
 
 In the project directory, you can run:
