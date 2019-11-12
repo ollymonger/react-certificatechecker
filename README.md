@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-##Getting Set-up
+### Getting Set-up
 This is React Project with a NODEJS Server.
 
 To set this project up for own development:
