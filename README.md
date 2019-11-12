@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Getting Set-up
-This is React Project with a NODEJS Server.
+This is React Project with a NODEJS Server which connects to Microsoft Azure's Table Storage.
 
 To set this project up for own development:
   - install required components: (npm i ... --save):
@@ -9,11 +9,13 @@ To set this project up for own development:
     - express
     - azure-storage
     - dotenv
+    - @material-ui/core
     
-  - Create a file called: server.env
-  - Place access keys for your table storage in here under the names:
-    - 'ACCESS_KEY'
-    - 'STORAGENAME'
+  - Create a file called: server.env - ensuring this file is with the server.ts
+  - The server needs the following variables:
+    - 'ACCESS_KEY' - access keys
+    - 'STORAGENAME' - storage table name
+    - 'PORT' - port that you'd like to use, I use :9999 
   - The table will be created if it does not exist.
 
 ## Available Scripts
