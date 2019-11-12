@@ -54,7 +54,7 @@ app.get('/checkCerts', function (req, res) {
                             name: result.host,
                             port: result.port,
                             valid: false,
-                            daysleft: '0',
+                            dayleft: '0',
                             valid_to: '0'
                         }
                         jsonResult.push(jsonFailed);
@@ -62,11 +62,15 @@ app.get('/checkCerts', function (req, res) {
                 })
             }
         }
+        jsonResult.sort(function(a, b){
+            return a.dayleft - b.dayleft;
+        })
         res.send(jsonResult);
     })
 })
 
 app.get('/resetCerts', function(req, res) {
     jsonResult = [];
-    console.log('Certificates reset!')
+    console.log('Certificates reset at: '+ new Date().toUTCString());
+    res.redirect('http://localhost:3000');
 })

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Typography, LinearProgress, makeStyles, createStyles, Theme, Table, TableRow, TableCell, TableHead, TableBody } from "@material-ui/core";
+import { Typography, LinearProgress, makeStyles, createStyles, Theme, Table, TableRow, TableCell, TableHead, TableBody, Button } from "@material-ui/core";
 import './App.css';
-import classes from "*.module.css";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,11 +41,57 @@ export function App() {
         <div className={classes.all}>
           <Typography variant="h4">SITE CERTIFICATE CHECKER</Typography>
           <Typography variant="body1">There is logic to check to see if it has been refreshed in the last<br />
-            2 days, just so its not constantly doing refreshing the data. IF there is a bar at the top we're still loading.</Typography>
-        </div>
+            2 days, just so its not constantly doing refreshing the data. We may still be loading, or the server's offline.</Typography>
+        </div>        
+        <header><LinearProgress color="secondary" style={{width:'500px', height:'25px'}}/></header>
       </div>
     )
   }
+
+  const getCertificates = (certificate) => {
+    if (certificate.dayleft === '0') {
+      return (
+        <>
+          <TableCell>{certificate.name}</TableCell>
+          <TableCell>{certificate.port}</TableCell>
+          <TableCell>{certificate.valid.toString()}</TableCell>
+          <TableCell style={{ backgroundColor: 'rgba(255, 0, 0, 0.3)' }}>Unknown/No Certificate</TableCell>
+          <TableCell>{certificate.dayleft}</TableCell>
+        </>
+      );
+    } else
+      if (certificate.dayleft < 30) {
+        return (
+          <>
+            <TableCell>{certificate.name}</TableCell>
+            <TableCell>{certificate.port}</TableCell>
+            <TableCell>{certificate.valid.toString()}</TableCell>
+            <TableCell style={{ backgroundColor: 'rgba(255, 0, 0, 0.3)' }}>{new Date(certificate.valid_to).toUTCString()}</TableCell>
+            <TableCell>{certificate.dayleft}</TableCell>
+          </>
+        );
+      } else if (certificate.dayleft > 30 && certificate.dayleft < 60) {
+        return (
+          <>
+            <TableCell>{certificate.name}</TableCell>
+            <TableCell>{certificate.port}</TableCell>
+            <TableCell>{certificate.valid.toString()}</TableCell>
+            <TableCell style={{ backgroundColor: 'rgba(255, 255, 0, 0.3)' }}>{new Date(certificate.valid_to).toUTCString()}</TableCell>
+            <TableCell>{certificate.dayleft}</TableCell>
+          </>
+        );
+      } else if (certificate.dayleft > 60) {
+        return (
+          <>
+            <TableCell>{certificate.name}</TableCell>
+            <TableCell>{certificate.port}</TableCell>
+            <TableCell>{certificate.valid.toString()}</TableCell>
+            <TableCell style={{ backgroundColor: 'rgba(0, 255, 0, 0.3)' }}>{new Date(certificate.valid_to).toUTCString()}</TableCell>
+            <TableCell>{certificate.dayleft}</TableCell>
+          </>
+        );
+      }
+  };
 
   return (
     <div className={classes.root}>
@@ -54,9 +99,12 @@ export function App() {
       <div className={classes.all}>
         <Typography variant="h4">SITE CERTIFICATE CHECKER</Typography>
         <Typography variant="body1">There is logic to check to see if it has been refreshed in the last<br />
-          2 days, just so its not constantly doing refreshing the data. IF there is a bar at the top we're still loading.</Typography>
+          2 days, just so its not constantly doing refreshing the data. We have loaded the data, if nothing is in the table please refresh!<br/>
+          Not seeing a site you just entered? Give it a second! - Usually means the site is incorrect.</Typography>
       </div>
-
+      <form action="http://localhost:9999/resetCerts">
+        <Button type="submit" variant="outlined" color="secondary" style={{ width:'300px', position:'relative', marginLeft:'100px'}}>Reset Certicates</Button>
+      </form>
       <Table className={classes.Table}>
         <TableHead>
           <TableRow>
@@ -70,11 +118,7 @@ export function App() {
         <TableBody>
           {certs.map((allCerts, id: number) => (
             <TableRow key={id}>
-              <TableCell>{allCerts.name}</TableCell>
-              <TableCell>{allCerts.port}</TableCell>
-              <TableCell>{allCerts.valid.toString()}</TableCell>
-              <TableCell>{new Date(allCerts.valid_to).toUTCString()}</TableCell>
-              <TableCell>{allCerts.dayleft}</TableCell>
+              {getCertificates(allCerts)}
             </TableRow>
           ))}
         </TableBody>
