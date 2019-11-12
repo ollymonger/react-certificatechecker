@@ -23,12 +23,17 @@ const useStyles = makeStyles((theme: Theme) =>
 export function App() {
   const classes = useStyles(1);
   const [certs, setCerts] = useState(null);
+  const [lastRef, setLastRef] = useState(null);
 
   useEffect(() => {
     const getCerts = async () => {
       const checkCerts = await fetch('http://localhost:9999/checkCerts');
       checkCerts.json().then(function (data) {
         setCerts(data);
+      })
+      const lastRefreshed = await fetch('http://localhost:9999/lastRefreshed');
+      lastRefreshed.json().then(function(data){
+        setLastRef(data);
       })
     };
     getCerts();
@@ -40,7 +45,7 @@ export function App() {
         <header><LinearProgress color="secondary" /></header>
         <div className={classes.all}>
           <Typography variant="h4">SITE CERTIFICATE CHECKER</Typography>
-          <Typography variant="body1">There is logic to check to see if it has been refreshed in the last<br />
+          <Typography variant="body1">This was last refreshed: "Server probably offline"<br />
             2 days, just so its not constantly doing refreshing the data. We may still be loading, or the server's offline.</Typography>
         </div>        
         <header><LinearProgress color="secondary" style={{width:'500px', height:'25px'}}/></header>
@@ -98,8 +103,9 @@ export function App() {
       <header></header>
       <div className={classes.all}>
         <Typography variant="h4">SITE CERTIFICATE CHECKER</Typography>
-        <Typography variant="body1">There is logic to check to see if it has been refreshed in the last<br />
-          2 days, just so its not constantly doing refreshing the data. We have loaded the data, if nothing is in the table please refresh!<br/>
+        <Typography variant="body1">This was last refreshed: </Typography>
+        <Typography variant="overline" style={{fontSize: '20px'}}>{lastRef}</Typography>
+        <Typography variant="body1">We have loaded the data, if nothing is in the table please refresh!<br/>
           Not seeing a site you just entered? Give it a second! - Usually means the site is incorrect.</Typography>
       </div>
       <form action="http://localhost:9999/resetCerts">
