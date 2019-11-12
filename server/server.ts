@@ -6,7 +6,7 @@ const app = express();
 const storage = require('azure-storage');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: '../server.env' });
+dotenv.config({ path: './server.env' });
 
 var jsonResult = [];
 const storageClient = storage.createTableService(process.env['ACCESS_KEY'], process.env['STORAGENAME']);
