@@ -18,7 +18,7 @@ To set this project up for own development:
     - 'PORT' - port that you'd like to use, I use :9999 
   - The table will be created if it does not exist.
   - Once all the above is complete:
-    - open a cmd prompt, cd to file locations and node server.ts to begin the server!
+    - open a cmd prompt, cd to file locations and type: node server.ts to begin the server!
     - in another cmd prompt, cd to the Main directory for this react project and type: npm start to begin the react site.
 
 ## Available Scripts
