@@ -9,6 +9,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './server.env' });
 
 var jsonResult = [];
+var lastRefreshed = [];
 const storageClient = storage.createTableService(process.env['ACCESS_KEY'], process.env['STORAGENAME']);
 
 storageClient.createTableIfNotExists("urls", (err, result) => {
@@ -30,6 +31,10 @@ app.get('/', function (req, res) {
     res.send('Cookies: ' + JSON.stringify(req.cookies));
 })
 
+app.get('/lastRefreshed', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(lastRefreshed);
+})
 
 app.get('/checkCerts', function (req, res) {
     var array = [];
@@ -65,12 +70,17 @@ app.get('/checkCerts', function (req, res) {
         jsonResult.sort(function(a, b){
             return a.dayleft - b.dayleft;
         })
+        if(lastRefreshed.length == 0){
+            lastRefreshed.push(new Date().toUTCString());
+        }
         res.send(jsonResult);
     })
 })
 
 app.get('/resetCerts', function(req, res) {
     jsonResult = [];
+    lastRefreshed = [];
+    lastRefreshed.push(new Date().toUTCString());
     console.log('Certificates reset at: '+ new Date().toUTCString());
     res.redirect('http://localhost:3000');
 })
