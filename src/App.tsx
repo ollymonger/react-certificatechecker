@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AppBar, Toolbar, Typography, makeStyles, createStyles, Theme, Button } from "@material-ui/core";
 import './App.css';
 import { RenderTable } from "./components/Table/RenderTable";
+import { RenderManual } from "./components/Table/RenderManual";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,6 +78,7 @@ export function App() {
         <div className={classes.Table}>
           <RenderTable />
         </div>
+        <RenderManual />
       </div>
     )
   } else {
