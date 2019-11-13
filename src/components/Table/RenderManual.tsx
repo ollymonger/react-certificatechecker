@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme: Theme) =>
     }));
 
 
-export function RenderTable() {
+export function RenderManual() {
     const classes = useStyles(1);
     const [certs, setCerts] = useState(null);
 
     useEffect(() => {
         const getCerts = async () => {
-            const checkCerts = await fetch('http://localhost:9999/checkCerts');
+            const checkCerts = await fetch('http://localhost:9999/getManualCerts');
             checkCerts.json().then(function (data) {
                 setCerts(data);
             })
@@ -38,9 +38,7 @@ export function RenderTable() {
             <div className={classes.root}>
                 <header><LinearProgress color="secondary" /></header>
                 <div className={classes.all}>
-                    <Typography variant="h4">SITE CERTIFICATE CHECKER</Typography>
-                    <Typography variant="body1">This was last refreshed: "Server probably offline"<br />
-                        2 days, just so its not constantly doing refreshing the data. We may still be loading, or the server's offline.</Typography>
+                    <Typography variant="body2">Waiting for manual checks to be returned!</Typography>
                 </div>
                 <header><LinearProgress color="secondary" style={{ width: '500px', height: '25px' }} /></header>
             </div>
