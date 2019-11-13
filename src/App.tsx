@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Typography, makeStyles, createStyles, Theme, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, makeStyles, createStyles, Theme, Button } from "@material-ui/core";
 import './App.css';
 import { RenderTable } from "./components/Table/RenderTable";
 
@@ -16,9 +16,23 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '500px'
     },
     header: {
-      height: '50px',
-      padding: '5px 5px 5px 5px'
+      height: '75px',
+      padding: '7px 7px 7px 7px',
+      marginLeft: '500px',
+      width: '65vw',
+      backgroundColor: 'rgba(0,0,0,0)',
+      boxShadow: 'none',
+      backgroundImage: 'linear-gradient(to right, rgba(155, 227, 222, 1), rgba(255,0,0,0))'
     },
+    underBar: {
+      width: '550px',
+      boxShadow: 'none',
+      textShadow: '4px 4px black',
+      backgroundColor: 'rgba(155, 227, 222, 1)',
+      height: '76px',
+      marginTop: '-76px',
+      borderRadius: '0px 10px 10px 0px'
+    }
   }));
 
 export function App() {
@@ -37,10 +51,17 @@ export function App() {
 
   if (lastRef != null) {
     return (
+
       <div className={classes.root}>
-        <header></header>
+        <header>
+          <AppBar position="static" className={classes.header}> </AppBar>
+          <AppBar position="static" className={classes.underBar}>
+            <Toolbar>
+              <Typography variant="h4">SITE CERTIFICATE CHECKER</Typography>
+            </Toolbar>
+          </AppBar>
+        </header>
         <div className={classes.all}>
-          <Typography variant="h4">SITE CERTIFICATE CHECKER</Typography>
           <Typography variant="body1">This was last refreshed: </Typography>
           <Typography variant="overline" style={{ fontSize: '20px' }}>{lastRef}</Typography>
           <Typography variant="body1">We have loaded the data, if nothing is in the table please refresh!<br />

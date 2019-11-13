@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
         Table: {
             userSelect: 'none',
             width: '500px',
-        }
+        }        
     }));
 
 
