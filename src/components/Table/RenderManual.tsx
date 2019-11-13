@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Typography, LinearProgress, makeStyles, createStyles, Theme, Table, TableRow, TableCell, TableHead, TableBody, Button, IconButton } from "@material-ui/core";
+import { Typography, makeStyles, createStyles, Theme, Table, TableRow, TableCell, TableHead, TableBody, Button, IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -10,12 +10,13 @@ const useStyles = makeStyles((theme: Theme) =>
             overflowY: 'hidden',
             userSelect: 'none',
             padding: '10px 10px 10px 10px',
-            width: '500px'
+            width: '30vw'
         },
         Table: {
             userSelect: 'none',
-            width: '60vw',
-        }        
+            width: '30vw',
+            marginTop: '-200px'
+        }
     }));
 
 
@@ -25,7 +26,7 @@ export function RenderManual() {
 
     useEffect(() => {
         const getCerts = async () => {
-            const checkCerts = await fetch('http://localhost:9999/getManualCerts');
+            const checkCerts = await fetch('http://localhost:9999/getManualChecks');
             checkCerts.json().then(function (data) {
                 setCerts(data);
             })
@@ -36,58 +37,20 @@ export function RenderManual() {
     if (certs === null) {
         return (
             <div className={classes.root}>
-                <header><LinearProgress color="secondary" /></header>
-                <div className={classes.all}>
-                    <Typography variant="body2">Waiting for manual checks to be returned!</Typography>
-                </div>
-                <header><LinearProgress color="secondary" style={{ width: '500px', height: '25px' }} /></header>
+                <Typography variant="body2">Waiting for manual checks to be returned!</Typography>
             </div>
         )
     }
 
     const getCertificates = (certificate) => {
-        if (certificate.dayleft === '0') {
-            return (
-                <>
-                    <TableCell>{certificate.name}</TableCell>
-                    <TableCell>{certificate.port}</TableCell>
-                    <TableCell>{certificate.valid.toString()}</TableCell>
-                    <TableCell style={{ backgroundColor: 'rgba(255, 0, 0, 0.3)' }}>Unknown/No Certificate</TableCell>
-                    <TableCell>{certificate.dayleft}</TableCell>
-                </>
-            );
-        } else
-            if (certificate.dayleft < 30) {
-                return (
-                    <>
-                        <TableCell>{certificate.name}</TableCell>
-                        <TableCell>{certificate.port}</TableCell>
-                        <TableCell>{certificate.valid.toString()}</TableCell>
-                        <TableCell style={{ backgroundColor: 'rgba(255, 0, 0, 0.3)' }}>{new Date(certificate.valid_to).toUTCString()}</TableCell>
-                        <TableCell>{certificate.dayleft}</TableCell>
-                    </>
-                );
-            } else if (certificate.dayleft > 30 && certificate.dayleft < 60) {
-                return (
-                    <>
-                        <TableCell>{certificate.name}</TableCell>
-                        <TableCell>{certificate.port}</TableCell>
-                        <TableCell>{certificate.valid.toString()}</TableCell>
-                        <TableCell style={{ backgroundColor: 'rgba(255, 255, 0, 0.3)' }}>{new Date(certificate.valid_to).toUTCString()}</TableCell>
-                        <TableCell>{certificate.dayleft}</TableCell>
-                    </>
-                );
-            } else if (certificate.dayleft > 60) {
-                return (
-                    <>
-                        <TableCell>{certificate.name}</TableCell>
-                        <TableCell>{certificate.port}</TableCell>
-                        <TableCell>{certificate.valid.toString()}</TableCell>
-                        <TableCell style={{ backgroundColor: 'rgba(0, 255, 0, 0.3)' }}>{new Date(certificate.valid_to).toUTCString()}</TableCell>
-                        <TableCell>{certificate.dayleft}</TableCell>
-                    </>
-                );
-            }
+        return (
+            <>
+                <TableCell>{certificate.name}</TableCell>
+                <TableCell>{certificate.valid.toString()}</TableCell>
+                <TableCell style={{ backgroundColor: 'rgba(0, 255, 0, 0.3)' }}>{new Date(certificate.valid_to).toUTCString()}</TableCell>
+                <TableCell>{certificate.description}</TableCell>
+            </>
+        );
     };
 
     return (
@@ -96,10 +59,9 @@ export function RenderManual() {
                 <TableHead>
                     <TableRow>
                         <TableCell>URL</TableCell>
-                        <TableCell>PORT</TableCell>
                         <TableCell>VALID</TableCell>
                         <TableCell>VALID TO</TableCell>
-                        <TableCell>DAYS REMAINING</TableCell>
+                        <TableCell>DESCRIPTION</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -107,7 +69,7 @@ export function RenderManual() {
                         <TableRow key={id} selected={true} hover={true}>
                             {getCertificates(allCerts)}
                         </TableRow>
-                    ))}        
+                    ))}
                 </TableBody>
             </Table>
 
