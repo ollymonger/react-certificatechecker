@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '76px',
       marginTop: '-76px',
       borderRadius: '0px 10px 10px 0px'
+    },
+    Table: {
+      marginLeft: '35vw',
+      marginTop: '-200px'
     }
   }));
 
@@ -70,7 +74,9 @@ export function App() {
         <form action="http://localhost:9999/resetCerts">
           <Button type="submit" variant="outlined" color="secondary" style={{ width: '300px', position: 'relative', marginLeft: '100px' }}>Reset Certicates</Button>
         </form>
-        <RenderTable />
+        <div className={classes.Table}>
+          <RenderTable />
+        </div>
       </div>
     )
   } else {
