@@ -24,6 +24,9 @@ To set this project up for own development:
 
 ![Image_Of_Site](https://i.imgur.com/zwlLs7f.png)
 
+## Table Storage set-up
+![Image_Of_Table_Storage](https://i.imgur.com/Cn56ZbW.png)
+
 
 ## Available Scripts
 
