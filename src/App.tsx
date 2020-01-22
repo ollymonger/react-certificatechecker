@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { AppBar, Toolbar, Typography, makeStyles, createStyles, Theme, Button } from "@material-ui/core";
 import './App.css';
-import { RenderTable } from "./components/Table/RenderTable";
-import { RenderManual } from "./components/Table/RenderManual";
+import { RenderAutoChecks } from "./components/Table/RenderAutoChecks";
+import { RenderManualChecks } from "./components/Table/RenderManualChecks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,13 +23,13 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '65vw',
       backgroundColor: 'rgba(0,0,0,0)',
       boxShadow: 'none',
-      backgroundImage: 'linear-gradient(to right, rgba(155, 227, 222, 1), rgba(255,0,0,0))'
+      backgroundImage: 'linear-gradient(to right, rgba(254, 139, 54, 1), rgba(255,0,0,0))'
     },
     underBar: {
       width: '550px',
       boxShadow: 'none',
       textShadow: '4px 4px black',
-      backgroundColor: 'rgba(155, 227, 222, 1)',
+      backgroundColor: 'rgba(254, 139, 54, 1)',
       height: '76px',
       marginTop: '-76px',
       borderRadius: '0px 10px 10px 0px'
@@ -73,17 +73,17 @@ export function App() {
             Not seeing a site you just entered? Give it a second! - Usually means the site is incorrect.</Typography>
         </div>
         <form action="http://localhost:9999/resetCerts">
-          <Button type="submit" variant="outlined" color="secondary" style={{ width: '300px', position: 'relative', marginLeft: '100px' }}>Reset Certicates</Button>
+          <Button type="submit" variant="outlined" style={{ width: '300px', position: 'relative', marginLeft: '100px', color: 'rgba(254, 139, 54, 1)', fontSize: '25px'}}>Reset Certicates</Button>
         </form>
         <div className={classes.Table}>
-          <RenderTable />
+          <RenderAutoChecks />
         </div>
-        <RenderManual />
+        <RenderManualChecks />
       </div>
     )
   } else {
     return (
-      <RenderTable />
+      <RenderAutoChecks />
     )
   }
 }

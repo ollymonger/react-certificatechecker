@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }));
 
 
-export function RenderTable() {
+export function RenderAutoChecks() {
     const classes = useStyles(1);
     const [certs, setCerts] = useState(null);
 

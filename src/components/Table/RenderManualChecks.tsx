@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }));
 
 
-export function RenderManual() {
+export function RenderManualChecks() {
     const classes = useStyles(1);
     const [certs, setCerts] = useState(null);
 

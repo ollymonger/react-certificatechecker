@@ -37,7 +37,6 @@ app.get('/lastRefreshed', function (req, res) {
     res.send(lastRefreshed);
 })
 
-
 app.get('/getManualChecks', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var query = new storage.TableQuery().top(100).where('PartitionKey eq ?', 'ManualUrl') //ROWKEY MUST EQUAL MANUAL
@@ -48,8 +47,8 @@ app.get('/getManualChecks', function(req, res) {
 
             for(var i = 0; i < manualChecks.length; i++) {
                 var jsonEntries = {
-                    name: resu.entries[i].Url._,
-                    valid: resu.entries[i].Valid._.toString(),
+                    name: resu.entries[i].ManUrl._,
+                    valid: resu.entries[i].Valid._,
                     valid_to: resu.entries[i].Valid_to._,
                     description: resu.entries[i].Desc._
                 }
