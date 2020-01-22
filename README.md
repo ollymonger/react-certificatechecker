@@ -11,14 +11,14 @@ To set this project up for own development:
     - dotenv
     - @material-ui/core
     
-  - Create a file called: server.env - ensuring this file is with the server.ts
-  - The server needs the following variables:
+  - Create a file called: server.env - be sure that this file is in the same folder as the: server.ts
+  - The server.env needs the following variables:
     - 'ACCESS_KEY' - access keys
     - 'STORAGENAME' - storage table name
-    - 'PORT' - port that you'd like to use, I use :9999 
+    - 'PORT' - port that you'd like to use, I use :9999 // if this is changed, remember to change the URL/Port in the App/RenderManualChecks/RenderAutoCheck files
   - The table will be created if it does not exist.
   - Once all the above is complete:
-    - open a cmd prompt, cd to file locations and type: node server.ts to begin the server!
+    - open a cmd prompt, cd to file locations and type: node server.ts (or node server/server.ts) to begin the server!
     - in another cmd prompt, cd to the Main directory for this react project and type: npm start to begin the react site.
 
 
