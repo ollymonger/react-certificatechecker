@@ -6,7 +6,7 @@ const app = express();
 const storage = require('azure-storage');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: './server.env' });
+dotenv.config({ path: 'server/server.env' });
 
 var jsonResult = [];
 var lastRefreshed = [];
