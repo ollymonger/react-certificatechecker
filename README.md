@@ -21,6 +21,10 @@ To set this project up for own development:
     - open a cmd prompt, cd to file locations and type: node server.ts to begin the server!
     - in another cmd prompt, cd to the Main directory for this react project and type: npm start to begin the react site.
 
+
+![Image_Of_Site](https://i.imgur.com/zwlLs7f.png)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
